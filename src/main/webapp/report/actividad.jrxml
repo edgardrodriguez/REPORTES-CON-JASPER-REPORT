@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="actividad" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e116e57d-0408-411a-a58c-af8337972cbf">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select* from V_ACTIVIDADES ORDER BY IDACT DESC]]>
+	</queryString>
+	<field name="IDACT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="IDACT"/>
+		<property name="com.jaspersoft.studio.field.label" value="IDACT"/>
+	</field>
+	<field name="NOMACT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMACT"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMACT"/>
+	</field>
+	<field name="MONESPACT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="MONESPACT"/>
+		<property name="com.jaspersoft.studio.field.label" value="MONESPACT"/>
+	</field>
+	<field name="FECACT" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="FECACT"/>
+		<property name="com.jaspersoft.studio.field.label" value="FECACT"/>
+	</field>
+	<field name="ESTACT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ESTACT"/>
+		<property name="com.jaspersoft.studio.field.label" value="ESTACT"/>
+	</field>
+	<field name="ESTADO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ESTADO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ESTADO"/>
+	</field>
+	<group name="IDACT">
+		<groupExpression><![CDATA[$F{IDACT}]]></groupExpression>
+	</group>
+	<group name="NOMACT">
+		<groupExpression><![CDATA[$F{NOMACT}]]></groupExpression>
+	</group>
+	<group name="MONESPACT">
+		<groupExpression><![CDATA[$F{MONESPACT}]]></groupExpression>
+	</group>
+	<group name="FECACT">
+		<groupExpression><![CDATA[$F{FECACT}]]></groupExpression>
+	</group>
+	<group name="ESTACT">
+		<groupExpression><![CDATA[$F{ESTACT}]]></groupExpression>
+	</group>
+	<group name="ESTADO">
+		<groupExpression><![CDATA[$F{ESTADO}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="146" y="10" width="250" height="30" uuid="9c5e7bf3-068a-4571-bad1-92560f533c91"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ACTIVIDADES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="4" width="140" height="30" uuid="7a700314-7199-4a0a-b355-a685ae96d7ef">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f46a01cf-ed86-4507-b2a2-57ad60e46ac0"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DE LA ACTIVIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="4" width="122" height="28" uuid="39a56e52-d6db-497c-b8e7-4b227211e495">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1074b996-1d2f-4ead-88e8-de4206dff3bf"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO POR ACTIVIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="4" width="99" height="30" uuid="3653422e-a1e7-49a8-b8b0-58a04b2e44be">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aab8f164-32ce-48c2-9444-5f017af1790e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="4" width="119" height="30" uuid="0718b973-a582-46ab-9bea-7d0d082fc33e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f23e2cb-9914-4dd3-adfd-80c979d49315"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="36" width="545" height="1" uuid="e5474fa9-cd11-498a-a92b-86c75e9ff8b1"/>
+			</line>
+			<line>
+				<reportElement x="400" y="0" width="1" height="36" uuid="2271152d-14ca-4e72-9f29-63542c09cbfd"/>
+			</line>
+			<line>
+				<reportElement x="543" y="0" width="1" height="36" uuid="43ee1b42-2488-4c59-9f9b-cd7dace961fa"/>
+			</line>
+			<line>
+				<reportElement x="150" y="0" width="1" height="36" uuid="47055aba-724e-4430-aaec-8ef3d72445df"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="36" uuid="acbb0452-a362-4907-9d22-f80ec87c17a0"/>
+			</line>
+			<line>
+				<reportElement x="290" y="0" width="1" height="36" uuid="7e680171-a924-4799-992b-6a4950ab5240"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="544" height="1" uuid="779927ac-d287-4092-9d9a-1f9a76723210"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="5" width="144" height="30" uuid="71eeedd7-e958-467e-82b2-a2b9988e7f5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f46a01cf-ed86-4507-b2a2-57ad60e46ac0"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NOMACT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="5" width="128" height="30" uuid="43a28346-0711-437e-a04a-4aeee0418cf9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1074b996-1d2f-4ead-88e8-de4206dff3bf"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MONESPACT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="5" width="98" height="30" uuid="125d15e6-e7d0-4b64-8b8c-4812d079cc91">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aab8f164-32ce-48c2-9444-5f017af1790e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd - MMM - y").format($F{FECACT})
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="4" width="120" height="30" uuid="9a78cec7-6441-48ce-9bc8-d81ed2b8c99f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f23e2cb-9914-4dd3-adfd-80c979d49315"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTADO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="-1" width="1" height="41" uuid="91052f0a-4a20-4674-9fe5-1be5c5c3eca6"/>
+			</line>
+			<line>
+				<reportElement x="150" y="-1" width="1" height="41" uuid="ff10af9a-fe1a-4725-be68-36408ff63148"/>
+			</line>
+			<line>
+				<reportElement x="290" y="-1" width="1" height="41" uuid="5033fecb-6df4-4d84-96fb-a257ff0b04e4"/>
+			</line>
+			<line>
+				<reportElement x="400" y="-1" width="1" height="41" uuid="9c38daad-0e94-4252-aca1-debd3a4ba626"/>
+			</line>
+			<line>
+				<reportElement x="543" y="-1" width="1" height="41" uuid="630c94e0-1608-4557-a99e-17aa18d46a67"/>
+			</line>
+			<line>
+				<reportElement x="0" y="39" width="543" height="1" uuid="2a97fef3-ee3a-43e1-8800-241305c6a168"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="9" splitType="Stretch"/>
+	</summary>
+</jasperReport>

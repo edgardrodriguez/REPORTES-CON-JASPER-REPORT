@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:event listener="#{actividadesC.listar()}" type="preRenderView" />
+        <p:growl id="msj" showDetail="true" skipDetailIfEqualsSummary="true">
+            <p:autoUpdate/>
+        </p:growl>
+    </h:head>
+    <h:body>
+        <h:form id="formReport">
+            <p:panel header="REPORTE" style="text-align: center">
+                <p:panelGrid columns="2" style="margin: 0 auto">
+                    <p:outputLabel value="NOMBRE DE LA ACTIVIDAD"/>
+                    <p:inputText value="#{actividadesC.actividadModel.nombreAct}"></p:inputText>
+                    <p:outputLabel value="MONTO DE LA ACTIVIDAD"/>
+                    <p:inputNumber value="#{actividadesC.actividadModel.montoAct}"></p:inputNumber>
+                    <p:outputLabel value="FECHA"/>
+                    <p:calendar id="germanV2" value="#{actividadesC.actividadModel.fecha}" locale="de" navigator="true" showOn="button"
+                                pattern="dd-MM-yyyy"/>
+                    <p:outputLabel value="ESTADO"/>
+                    <p:selectOneRadio id="rol" value="#{actividadesC.actividadModel.estado}" >
+                        <f:selectItem itemLabel="ACTIVO" itemValue="A"/>
+                        <f:selectItem itemLabel="INACTIVO" itemValue="I"/>
+                    </p:selectOneRadio>
+                    <p:commandButton value="Registrar" actionListener="#{actividadesC.registrar()}"
+                                     update="formReport :formTablaReport:tblReport" /> 
+                </p:panelGrid>
+            </p:panel>
+            <p:commandButton value="REPORTE" actionListener="#{actividadesC.reporteCuota()}" ajax="false"/>
+        </h:form>
+        <h:form  style="background-color: white;">
+            <h2 style="align-content: center;align-items: center;text-align: center">REPORTES</h2>
+            <p:panelGrid columns="4">
+                <p:outputLabel></p:outputLabel><p:outputLabel>FECHA INICIAL</p:outputLabel><p:outputLabel>FECHA FINAL</p:outputLabel><p:outputLabel></p:outputLabel>
+                <p:outputLabel>LISTADO POR RANGO</p:outputLabel>
+                <p:calendar id="german1" value="#{actividadesC.actividadModel.fechaReportEntrada}" locale="de" navigator="true" pattern="dd-MM-yyyy" showOn="button"/>
+                <p:calendar id="german2" value="#{actividadesC.actividadModel.fechaReportSalida}" locale="de" navigator="true" pattern="dd-MM-yyyy" showOn="button"/>
+                <p:commandButton value="LISTAR" actionListener="#{actividadesC.reporteCuotaRango()}" ajax="false" style="background-color:yellowgreen;color:black;font-weight:bold;" />
+            </p:panelGrid>
+            <p:panelGrid columns="2">
+                <p:outputLabel>LISTADO POR DIA</p:outputLabel>
+                <p:selectOneMenu  value="#{actividadesC.actividadModel.fechaLista}" filter="true" filterMatchMode="startsWith">
+                    <f:selectItem itemLabel="SELECCIONE"/>
+                    <f:selectItems value="#{actividadesC.lstFecha}" var="apo" itemLabel="#{apo.fechaLista}" itemValue="#{apo.fechaLista}"/>
+                </p:selectOneMenu>
+                <p:commandButton value="LISTAR" actionListener="#{actividadesC.reporteListActividad()}" ajax="false" style="background-color:yellowgreen;color:black;font-weight:bold;" />
+            </p:panelGrid>
+        </h:form>
+        <h:form id="formTablaReport">
+            <p:dataTable id="tblReport"
+                         var="report"
+                         value="#{actividadesC.lstActividades}"
+                         selection="#{actividadesC.actividadModel}"
+                         selectionMode="single"
+                         rowKey="#{report.ID}"
+                         paginator="true"
+                         paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">
+                    <h:commandLink value="Descargar Listado" >
+                        <p:dataExporter type="xls" target="tblReport" fileName="Listado"/>
+                    </h:commandLink>
+                </f:facet>
+                <p:column headerText="NOMBRE" sortBy="#{report.nombreAct}" filterBy="#{report.nombreAct}">
+                    <h:outputText value="#{report.nombreAct}"/>
+                </p:column>
+                <p:column headerText="MONTO" sortBy="#{report.montoAct}" filterBy="#{report.montoAct}">
+                    <h:outputText value="#{report.montoAct}"/>
+                </p:column>
+                <p:column headerText="FECHA" sortBy="#{report.fecha}" filterBy="#{report.fecha}">
+                    <h:outputText value="#{report.fecha}"><f:convertDateTime type="date" pattern="dd-MM-yyyy"/></h:outputText>
+                </p:column>
+                <p:column headerText="ESTADO" sortBy="#{report.estadoVist}" filterBy="#{report.estadoVist}">
+                    <h:outputText value="#{report.estadoVist}"/>
+                </p:column>
+                <f:facet name="footer">
+                    EN TOTAL HAY #{fn:length(actividadesC.lstActividades)} REGISTROS.
+                </f:facet>
+            </p:dataTable>
+            <p:contextMenu for="tblReport">
+                <p:menuitem value="MODIFICAR" oncomplete="PF('wdlgDatos').show()" update=":formDialog"/>
+                <p:menuitem value="ELIMINAR" actionListener="#{actividadesC.eliminar()}" update="tblReport"> 
+                    <p:confirm header="CONFIRMACIÓN" message="¿Está seguro de eliminar este registro?"/>
+                </p:menuitem>
+            </p:contextMenu>
+        </h:form>
+        <p:dialog header="ACTUALIZAR DATOS" widgetVar="wdlgDatos" resizable="false" modal="true">
+            <h:form id="formDialog">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="NOMBRE DE LA ACTIVIDAD"/>
+                    <p:inputText value="#{actividadesC.actividadModel.nombreAct}"></p:inputText>
+                    <p:outputLabel value="MONTO DE LA ACTIVIDAD"/>
+                    <p:inputText value="#{actividadesC.actividadModel.montoAct}"></p:inputText>
+                    <p:outputLabel value="FECHA"/>
+                    <p:calendar id="german" value="#{actividadesC.actividadModel.fecha}" locale="de" navigator="true" showOn="button"
+                                pattern="dd-MM-yyyy"/>
+                    <p:outputLabel value="ESTADO"/>
+                    <p:selectOneRadio id="rol" value="#{actividadesC.actividadModel.estado}" >
+                        <f:selectItem itemLabel="ACTIVO" itemValue="A"/>
+                        <f:selectItem itemLabel="INACTIVO" itemValue="I"/>
+                    </p:selectOneRadio>
+                    <p:commandButton value="MODIFICAR" actionListener="#{actividadesC.modificar()}" update=":formTablaReport:tblReport" oncomplete="PF('wdlgDatos').hide()"/>
+                    <p:commandButton value="CANCELAR" oncomplete="PF('wdlgDatos').hide()"/>
+                </p:panelGrid>
+            </h:form>
+            <h:form>
+                <p:confirmDialog global="true">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no"/>
+                </p:confirmDialog>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+
